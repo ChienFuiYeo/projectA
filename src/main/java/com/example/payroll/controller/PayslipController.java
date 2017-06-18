@@ -29,17 +29,17 @@ public class PayslipController {
 		return payslipService.getByPayslipId(payslipId);
 	}
 
-	@RequestMapping(value = "{payslipId}/delete", method = RequestMethod.PUT)
+	@RequestMapping(value = "{payslipId}", method = RequestMethod.DELETE)
 	public String delete(@PathVariable Long payslipId) {
 		return payslipService.delete(payslipId);
 	}
 
-	@RequestMapping(value = "update", method = RequestMethod.PUT)
+	@RequestMapping(value = "{payslipId}", method = RequestMethod.PUT)
 	public Payslip update(@RequestBody Payslip payslip) {
 		return payslipService.update(payslip);
 	}
 
-	@RequestMapping(value = "insert", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public Payslip insert(@RequestBody PayslipInsertDTO payslipInsertDTO) {
 		return payslipService.insert(payslipInsertDTO);
 	}

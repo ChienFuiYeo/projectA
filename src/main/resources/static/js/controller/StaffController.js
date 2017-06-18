@@ -1,6 +1,6 @@
 /*
-'use strict';
-*/
+ 'use strict';
+ */
 
 angular
     .module('payrollApp')
@@ -27,13 +27,41 @@ angular
                     //     self.deleteStatus = data;
                     // });
                     console.log('Deleting staff ' + staff.staffId);
-                    self.staffs = staffService.DELETE_STAFF({staffId: staff.staffId});
+                    staffService.DELETE_STAFF({staffId: staff.staffId});
                 }
 
                 self.updateStaff = function (staff) {
                     console.log('Updating staff ' + staff.staffId);
-                    staff.name = 'yeo chien fui';
-                    self.staffs = staffService.UPDATE_STAFF({staffId: staff.staffId}, staff);
+                    staff.name = 'updated to yeo chien fui';
+                    staffService.UPDATE_STAFF({staffId: staff.staffId}, staff);
+                }
+
+                /*
+                 StaffInsertDTO:
+                    {"icNo":null,"staffCode":null,"name":null,"basicPay":null,"epfNo":null,"epfRate":null,"joinDate":null,"terminationDate":null,"workExp":null,"status":null}
+                 */
+                self.insertStaff = function (staff) {
+                    console.log('Inserting staff ' + staff);
+                    var staffInsertDTO = null;
+
+                    if (null != staff){
+                        staffInsertDTO = staff;
+                    }
+
+                    var staffInsertDTO = {
+                        icNo :  "900102123362",
+                        staffCode :  "Admin100",
+                        name :  "Teo Siew Li",
+                        basicPay :  1800,
+                        epfNo :  "P787984546",
+                        epfRate :  11.5,
+                        joinDate :  "10/10/2010",
+                        terminationDate :  "Present",
+                        workExp :  "5 years",
+                        status :  "active"
+                    };
+
+                    staffService.INSERT_STAFF(staffInsertDTO);
                 }
             }
         ]

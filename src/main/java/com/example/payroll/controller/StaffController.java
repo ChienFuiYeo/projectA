@@ -2,7 +2,7 @@ package com.example.payroll.controller;
 
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,15 +37,16 @@ public class StaffController {
 
 	@RequestMapping(value = "{staffId}", method = RequestMethod.PUT)
 	public Staff update(@PathVariable String staffId, @RequestBody Staff staff) {
-//		Staff oldStaff = staffService.getByStaffId(Long.parseLong(staffId));
-//		if(null != oldStaff){
-//			BeanUtils.copyProperties(staff, oldStaff);
-//		}
 		return staffService.update(staff);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Staff insert(@RequestBody StaffInsertDTO staffInsertDTO) {
 		return staffService.insert(staffInsertDTO);
+	}
+
+	public static void main(String[] args) throws Exception {
+		ObjectMapper om = new ObjectMapper();
+		System.out.println(om.writeValueAsString(new StaffInsertDTO()));
 	}
 }

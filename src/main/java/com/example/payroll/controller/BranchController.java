@@ -30,17 +30,17 @@ public class BranchController {
 		return branchService.getByBranchId(branchId);
 	}
 
-	@RequestMapping(value = "{branchId}/delete", method = RequestMethod.PUT)
+	@RequestMapping(value = "{branchId}", method = RequestMethod.DELETE)
 	public String delete(@PathVariable Long branchId) {
 		return branchService.delete(branchId);
 	}
 
-	@RequestMapping(value = "update", method = RequestMethod.PUT)
+	@RequestMapping(value = "{branchId}", method = RequestMethod.PUT)
 	public Branch update(@RequestBody Branch branch) {
 		return branchService.update(branch);
 	}
 
-	@RequestMapping(value = "insert", method = RequestMethod.POST)
+	@RequestMapping( method = RequestMethod.POST)
 	public Branch insert(@RequestBody BranchInsertDTO branchInsertDTO) {
 		return branchService.insert(branchInsertDTO);
 	}
