@@ -1,0 +1,9 @@
+#server:
+#  contextPath: /api
+
+spring:
+  data:
+    mongodb:
+      database: payroll
+      host: localhost
+      port: 27017

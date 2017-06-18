@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Angular JS -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="js/css.css">
+    <link rel="stylesheet" href="bower_components/material-design-lite/material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="bower_components/material-design-lite/material.min.js"></script>
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script src="bower_components/tether/dist/js/tether.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+
+</head>
+
+<body ng-app="payrollApp" ng-cloak>
+
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <span class="mdl-layout-title">Payroll Management System</span>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Menu</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" toogle-close ui-sref="staffMgmt">Staff</a>
+            <a class="mdl-navigation__link" toogle-close ui-sref="">Branch</a>
+            <a class="mdl-navigation__link" toogle-close ui-sref="">Job</a>
+            <a class="mdl-navigation__link" toogle-close ui-sref="">Payslip</a>
+            <a class="mdl-navigation__link" toogle-close ui-sref="">About Us</a>
+            <a class="mdl-navigation__link" toogle-close ui-sref="">Contact</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div layout="row">
+            <div flex="10">
+            </div>
+            <div flex="80">
+                <br/>
+                <div ui-view=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- My JS Script -->
+<script src="js/app.js"></script>
+<script src="js/directives.js"></script>
+<script src="js/constants/Constants.js"></script>
+<script src="js/controller/StaffController.js"></script>
+<script src="js/service/StaffService.js"></script>
+</body>
+
+</html>
