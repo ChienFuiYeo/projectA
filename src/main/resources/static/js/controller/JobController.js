@@ -1,6 +1,6 @@
 /*
-'use strict';
-*/
+ 'use strict';
+ */
 
 angular
     .module('payrollApp')
@@ -28,6 +28,28 @@ angular
                     console.log('Updating job ' + job.jobId);
                     job.jobDescription = 'updated sample job description';
                     jobService.UPDATE_JOB({jobId: job.jobId}, job);
+                }
+
+                /*
+                 JobInsertDTO:
+                 {"jobCode":null,"jobDescription":null,"rate":null,"oum":null,"remarks":null}
+                 */
+                self.insertStaff = function (staff) {
+                    console.log('Inserting staff ' + staff);
+                    var staffInsertDTO = null;
+
+                    if (null != staff) {
+                        staffInsertDTO = staff;
+                    }
+
+                    var staffInsertDTO = {
+                        jobCode: "JobCode01",
+                        jobDescription: "Lorry",
+                        oum: "",
+                        remarks: "job remakrs"
+                    };
+
+                    staffService.INSERT_STAFF(staffInsertDTO);
                 }
             }
         ]
