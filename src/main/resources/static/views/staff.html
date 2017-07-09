@@ -1,28 +1,14 @@
-<md-toolbar md-scroll-shrink>
-    <div class="md-toolbar-tools">Staff Management</div>
-</md-toolbar>
 
-<md-content>
-    <md-tabs>
-        <md-tab label="Search Staff">
-            <md-content class="md-padding">
-                <div ui-view="staffSearch"></div>
-            </md-content>
-        </md-tab>
-        <md-tab label="Create Staff">
-            <md-content class="md-padding">
-                <h1 class="md-display-2">Create Staff</h1>
-            </md-content>
-        </md-tab>
-        <md-tab label="Update Staff">
-            <md-content class="md-padding">
-                <h1 class="md-display-2">Update Staff</h1>
-            </md-content>
-        </md-tab>
-        <md-tab label="Delete Staff">
-            <md-content class="md-padding">
-                <h1 class="md-display-2">Delete Staff</h1>
-            </md-content>
-        </md-tab>
-    </md-tabs>
-</md-content>
+<div class="col-md-3">
+    <p class="lead">Staff Management</p>
+    <div class="list-group" ui-sref-active="active">
+        <a class="list-group-item" href="#" ui-sref="staffMgmt.staffSearch">Search Staff</a>
+        <a class="list-group-item" href="#" ui-sref="staffMgmt.staffCreateNew">Create New Staff</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-9">
+        <div ui-view=""></div>
+    </div>
+</div>

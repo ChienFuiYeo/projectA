@@ -5,8 +5,8 @@
 angular
     .module('payrollApp')
     .controller('staffController',
-        ['$scope', 'staffService',
-            function ($scope, staffService) {
+        ['$scope', '$state', 'staffService',
+            function ($scope, $state, staffService) {
 
                 // Define Controller variable
                 var self = this;
