@@ -1,10 +1,15 @@
 package com.example.payroll.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by yeo on 5/10/2017.
@@ -16,14 +21,21 @@ public class Staff {
 	private Long staffId;
 
 	@Indexed(unique = true)
+	@NotNull(message = "Staff's IC number must not be blank.")
 	private String icNo;
 
+	@Indexed(unique = true)
+	@NotNull(message = "Staff's code must not be blank.")
 	private String staffCode;
+
+	@NotNull(message = "Staff's name must not be blank.")
 	private String name;
 	private BigDecimal basicPay;
 	private String epfNo;
 	private BigDecimal epfRate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
 	private String joinDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
 	private String terminationDate;
 	private String workExp;
 	private String status;

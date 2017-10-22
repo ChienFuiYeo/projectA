@@ -6,8 +6,11 @@
     "angular-route": "~1.6.4",
     "angular-resource": "~1.6.4",
     "material-design-lite": "~1.3.0",
-    "angular-material" : "~1.1.4",
-    "bootstrap": "~4.0.0"
-
+    "angular-material": "~1.1.4",
+    "bootstrap": "~4.0.0",
+    "bootstrapvalidator": "~0.5.2",
+    "form.validation" : "v0.4.0",
+    "angular-utils-pagination": "master",
+    "moment": "~2.18.1"
   }
 }

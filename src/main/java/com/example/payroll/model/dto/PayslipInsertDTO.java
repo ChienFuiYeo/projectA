@@ -13,16 +13,10 @@ import java.util.List;
 /**
  * Created by yeo on 5/10/2017.
  */
-@Document
 public class PayslipInsertDTO {
 
-	@Indexed(unique = true)
 	private String payslipNo;
-
-	@Indexed(unique = true)
 	private Branch branch;
-
-	@Indexed(unique = true)
 	private Staff staff;
 
 	public PayslipInsertDTO() {

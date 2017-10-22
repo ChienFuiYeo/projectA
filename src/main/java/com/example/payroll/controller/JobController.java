@@ -2,7 +2,11 @@ package com.example.payroll.controller;
 
 import java.util.List;
 
+import com.example.payroll.model.Staff;
+import com.example.payroll.model.dto.StaffInsertDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.payroll.model.Job;
@@ -24,23 +28,29 @@ public class JobController {
 		return jobService.getAllJob();
 	}
 
-	@RequestMapping(value = "{jobId}", method = RequestMethod.GET)
-	public Job getJob(@PathVariable Long jobId) {
-		return jobService.getByJobId(jobId);
+	@RequestMapping(value = "{staffId}", method = RequestMethod.GET)
+	public ResponseEntity<Job> getStaff(@PathVariable String jobId) {
+		if (StringUtils.isEmpty(jobId)) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(jobService.getByJobId(Long.parseLong(jobId)));
 	}
 
-	@RequestMapping(value = "{jobId}", method = RequestMethod.DELETE)
-	public String delete(@PathVariable Long jobId) {
-		return jobService.delete(jobId);
+	@RequestMapping(value = "{staffId}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> delete(@PathVariable String staffId) {
+		if (null == jobService.delete(Long.parseLong(staffId))) {
+			return ResponseEntity.badRequest().build();
+		}
+		return ResponseEntity.ok().build();
 	}
 
-	@RequestMapping(value = "{jobId}", method = RequestMethod.PUT)
-	public Job update(@RequestBody Job job) {
-		return jobService.update(job);
+	@RequestMapping(value = "{staffId}", method = RequestMethod.PUT)
+	public ResponseEntity<Job> update(@PathVariable String staffId, @RequestBody Job job) {
+		return ResponseEntity.ok(jobService.update(job));
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Job insert(@RequestBody JobInsertDTO jobInsertDTO) {
-		return jobService.insert(jobInsertDTO);
+	public ResponseEntity<Job> insert(@RequestBody JobInsertDTO jobInsertDTO) {
+		return ResponseEntity.ok(jobService.insert(jobInsertDTO));
 	}
 }

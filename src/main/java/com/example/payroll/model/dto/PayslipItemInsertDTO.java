@@ -12,18 +12,11 @@ import com.example.payroll.model.Payslip;
 /**
  * Created by yeo on 5/10/2017.
  */
-@Document
 public class PayslipItemInsertDTO {
 
-	@Indexed(unique = true)
 	private Payslip payslip;
-
-	@Indexed(unique = true)
 	private Job job;
-
-	@Indexed(unique = true)
 	private BigDecimal unit;
-
 	private String category;
 
 	public PayslipItemInsertDTO() {

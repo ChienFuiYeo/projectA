@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by yeo on 5/10/2017.
  */
@@ -14,7 +16,11 @@ public class Branch {
 	private Long branchId;
 
 	@Indexed(unique = true)
+	@NotNull(message = "Branch's Code must not be blank.")
 	private String branchCode;
+
+	@NotNull(message = "Branch's name must not be blank.")
+	private String branchName;
 
 	private String branchDescription;
 
@@ -43,5 +49,13 @@ public class Branch {
 
 	public void setBranchDescription(String branchDescription) {
 		this.branchDescription = branchDescription;
+	}
+
+	public String getBranchName() {
+		return branchName;
+	}
+
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
 	}
 }

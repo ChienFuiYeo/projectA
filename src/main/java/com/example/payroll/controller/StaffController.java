@@ -2,8 +2,9 @@ package com.example.payroll.controller;
 
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.payroll.model.Staff;
@@ -26,27 +27,28 @@ public class StaffController {
 	}
 
 	@RequestMapping(value = "{staffId}", method = RequestMethod.GET)
-	public Staff getStaff(@PathVariable String staffId) {
-		return staffService.getByStaffId(Long.parseLong(staffId));
+	public ResponseEntity<Staff> getStaff(@PathVariable String staffId) {
+		if (StringUtils.isEmpty(staffId)) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(staffService.getByStaffId(Long.parseLong(staffId)));
 	}
 
 	@RequestMapping(value = "{staffId}", method = RequestMethod.DELETE)
-	public String delete(@PathVariable String staffId) {
-		return staffService.delete(Long.parseLong(staffId));
+	public ResponseEntity<String> delete(@PathVariable String staffId) {
+		if (null == staffService.delete(Long.parseLong(staffId))) {
+			return ResponseEntity.badRequest().build();
+		}
+		return ResponseEntity.ok().build();
 	}
 
 	@RequestMapping(value = "{staffId}", method = RequestMethod.PUT)
-	public Staff update(@PathVariable String staffId, @RequestBody Staff staff) {
-		return staffService.update(staff);
+	public ResponseEntity<Staff> update(@PathVariable String staffId, @RequestBody Staff staff) {
+		return ResponseEntity.ok(staffService.update(staff));
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Staff insert(@RequestBody StaffInsertDTO staffInsertDTO) {
-		return staffService.insert(staffInsertDTO);
-	}
-
-	public static void main(String[] args) throws Exception {
-		ObjectMapper om = new ObjectMapper();
-		System.out.println(om.writeValueAsString(new StaffInsertDTO()));
+	public ResponseEntity<Staff> insert(@RequestBody StaffInsertDTO staffInsertDTO) {
+		return ResponseEntity.ok(staffService.insert(staffInsertDTO));
 	}
 }

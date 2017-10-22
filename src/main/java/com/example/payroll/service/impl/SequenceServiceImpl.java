@@ -35,6 +35,11 @@ public class SequenceServiceImpl implements SequenceService {
 	}
 
 	@Override
+	public Long getDeductionNextSeq() {
+		return getNextSequence("DEDUCTION_ID_SEQ");
+	}
+
+	@Override
 	public Long getPayslipNextSeq() {
 		return getNextSequence("PAYSLIP_ID_SEQ");
 	}

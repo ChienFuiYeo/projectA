@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by yeo on 5/10/2017.
  */
@@ -19,11 +21,12 @@ public class Job {
 	private Long jobId;
 
 	@Indexed(unique = true)
+	@NotNull(message = "Job's code must not be blank.")
 	private String jobCode;
 
 	private String jobDescription;
 	private BigDecimal rate;
-	private BigDecimal oum;
+	private String oum;
 	private String remarks;
 
 	public Job() {
@@ -61,11 +64,11 @@ public class Job {
 		this.rate = rate;
 	}
 
-	public BigDecimal getOum() {
+	public String getOum() {
 		return oum;
 	}
 
-	public void setOum(BigDecimal oum) {
+	public void setOum(String oum) {
 		this.oum = oum;
 	}
 

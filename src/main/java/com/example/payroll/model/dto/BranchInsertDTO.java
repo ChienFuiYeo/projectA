@@ -1,8 +1,6 @@
 package com.example.payroll.model.dto;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by yeo on 5/10/2017.
@@ -11,6 +9,8 @@ public class BranchInsertDTO {
 
 	@Indexed(unique = true)
 	private String branchCode;
+
+	private String branchName;
 
 	private String branchDescription;
 
@@ -31,5 +31,13 @@ public class BranchInsertDTO {
 
 	public void setBranchDescription(String branchDescription) {
 		this.branchDescription = branchDescription;
+	}
+
+	public String getBranchName() {
+		return branchName;
+	}
+
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
 	}
 }

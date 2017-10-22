@@ -11,6 +11,8 @@ public interface SequenceService {
 
 	public Long getBranchNextSeq();
 
+	public Long getDeductionNextSeq();
+
 	public Long getPayslipNextSeq();
 
 	public Long getPayslipItemNextSeq();

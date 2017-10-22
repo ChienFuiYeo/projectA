@@ -3,7 +3,8 @@ package com.example.payroll.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.payroll.model.Branch;
@@ -26,22 +27,28 @@ public class BranchController {
 	}
 
 	@RequestMapping(value = "{branchId}", method = RequestMethod.GET)
-	public Branch getBranch(@PathVariable Long branchId) {
-		return branchService.getByBranchId(branchId);
+	public ResponseEntity<Branch> getBranch(@PathVariable String branchId) {
+		if (StringUtils.isEmpty(branchId)) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(branchService.getByBranchId(Long.parseLong(branchId)));
 	}
 
 	@RequestMapping(value = "{branchId}", method = RequestMethod.DELETE)
-	public String delete(@PathVariable Long branchId) {
-		return branchService.delete(branchId);
+	public ResponseEntity<String> delete(@PathVariable String branchId) {
+		if (null == branchService.delete(Long.parseLong(branchId))) {
+			return ResponseEntity.badRequest().build();
+		}
+		return ResponseEntity.ok().build();
 	}
 
 	@RequestMapping(value = "{branchId}", method = RequestMethod.PUT)
-	public Branch update(@RequestBody Branch branch) {
-		return branchService.update(branch);
+	public ResponseEntity<Branch> update(@PathVariable String branchId, @RequestBody Branch branch) {
+		return ResponseEntity.ok(branchService.update(branch));
 	}
 
-	@RequestMapping( method = RequestMethod.POST)
-	public Branch insert(@RequestBody BranchInsertDTO branchInsertDTO) {
-		return branchService.insert(branchInsertDTO);
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Branch> insert(@RequestBody BranchInsertDTO branchInsertDTO) {
+		return ResponseEntity.ok(branchService.insert(branchInsertDTO));
 	}
 }

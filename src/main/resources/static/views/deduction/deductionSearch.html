@@ -1,0 +1,245 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Deduction Management</h3>
+    </div>
+</div>
+
+<nav class="navbar navbar-default">
+    <form class="navbar-form navbar-left" role="search">
+        <form class="navbar-form">
+
+            <div class="col-lg-12 layout-margin-sm">
+                <div class="form-group" style="display:inline;">
+                    <div class="input-group" style="display:table;">
+                        <span class="input-group-addon" style="width:1%;">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </span>
+                        <input class="form-control" name="search"
+                               placeholder="Type information of your deduction here to search ..." autocomplete="on"
+                               autofocus="autofocus" type="text" ng-model="search_query">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 text-right">
+                <button type="button" class="btn btn-primary" data-title="Create New Deduction" data-toggle="modal"
+                        data-target="#createDialog" ng-click="deductionCtrl.reset()">
+                    <span class="glyphicon glyphicon-user"> New Deduction</span> 
+                </button>
+            </div>
+        </form>
+    </form>
+</nav>
+
+
+<div class="well" id="deductionMgmtDiv" ng-init="deductionCtrl.getDeductions()" data-ng-controller="deductionController" ng-cloak>
+    <!-- Table to show employee detalis -->
+    <div class="table-responsive">
+        <table class="table table-striped" at-table at-paginated at-list="deductionCtrl.deductions"
+               at-config="deductionCtrl.config">
+            <tr>
+                <th ng-click="sort('deductionId')">
+                    Deduction ID
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='deductionId'"
+                          ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('code')">
+                    Deduction Code
+
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='code'"
+                          ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('name')">
+                    Deduction Name
+
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='name'"
+                          ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+
+            <tr dir-paginate="deduction in deductionCtrl.deductions | orderBy:sortKey:reverse | filter : search_query | filter : deductionCtrl.paginate | itemsPerPage:20">
+                <td>{{deduction.deductionId}}</td>
+                <td>{{deduction.code}}</td>
+                <td>{{deduction.name}}</td>
+
+                <td>
+                    <p data-placement="top" data-toggle="tooltip" title="Edit">
+                        <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
+                                data-target="#editDialog" ng-click="deductionCtrl.setSelectedDeduction(deduction)">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </p>
+                </td>
+                <td>
+                    <p data-placement="top" data-toggle="tooltip" title="Delete">
+                        <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
+                                data-target="#deleteDialog" ng-click="deductionCtrl.setSelectedDeduction(deduction)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"/>
+    </div>
+
+    <!-- Create New Deduction Dialog -->
+    <div class="modal fade" id="createDialog" tabindex="-1" role="dialog" aria-labelledby="createNew" aria-hidden="true"
+         ng-cloak>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title custom_align" id="HeadingCreate"> Create New Deduction</h4>
+                </div>
+
+                <form id="createDeductionForm">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Deduction Code: </label>
+                                    <input class="form-control" type="text" name="code"
+                                           placeholder="Example: PL-001"
+                                           ng-model="deductionCtrl.newDeduction.code">
+                                </div>
+                                <div class="form-group">
+                                    <label>Deduction Name: </label>
+                                    <input class="form-control" type="text" name="name" placeholder="Deduction Name"
+                                           ng-model="deductionCtrl.newDeduction.name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Deduction Description: </label>
+                                    <textarea class="form-control" rows="10" name="description" placeholder="Deduction Description"
+                                              ng-model="deductionCtrl.newDeduction.description"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Invoice No.: </label>
+                                    <input class="form-control" type="text" name="invoiceNo"
+                                           placeholder="Invoice No."
+                                           ng-model="deductionCtrl.newDeduction.invoiceNo">
+                                </div>
+                                <div class="form-group">
+                                    <label>Deduction Invoice Date: </label>
+                                    <p>
+                                        <md-datepicker ng-model="deductionCtrl.newDeduction.invoiceDate"
+                                                       md-placeholder="Enter date" md-open-on-focus></md-datepicker>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer ">
+                        <button class="btn btn-danger" ng-click="deductionCtrl.reset()">
+                            <span class="glyphicon glyphicon-info-sign"> Reset</span> 
+                        </button>
+                        <button class="btn btn-primary" ng-click="deductionCtrl.insertDeduction()">
+                            <span class="glyphicon glyphicon-edit"> Create</span> 
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Dialog-->
+    <div class="modal fade" id="editDialog" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title custom_align" id="HeadingEdit">Edit Deduction Detail</h4>
+                </div>
+
+                <form id="editDeductionForm">
+                    <div class="modal-body">
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Deduction Code: </label>
+                                    <input class="form-control" type="text" name="code"
+                                           placeholder="Example: PL-001"
+                                           ng-model="deductionCtrl.editDeduction.code">
+                                </div>
+                                <div class="form-group">
+                                    <label>Deduction Name: </label>
+                                    <input class="form-control" type="text" name="name" placeholder="Deduction Name"
+                                           ng-model="deductionCtrl.editDeduction.name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Deduction Description: </label>
+                                    <textarea class="form-control" rows="10" name="description" placeholder="Deduction Description"
+                                              ng-model="deductionCtrl.editDeduction.description"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Invoice No.: </label>
+                                    <input class="form-control" type="text" name="invoiceNo"
+                                           placeholder="Invoice No."
+                                           ng-model="deductionCtrl.editDeduction.invoiceNo">
+                                </div>
+                                <div class="form-group">
+                                    <label>Deduction Invoice Date: </label>
+                                    <p>
+                                        <md-datepicker ng-model="deductionCtrl.editDeduction.invoiceDate"
+                                                       md-placeholder="Enter date" md-open-on-focus></md-datepicker>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-lg"
+                                ng-click="deductionCtrl.updateDeduction(deductionCtrl.editDeduction)" data-dismiss="">
+                            <span class="glyphicon glyphicon-edit"> Update</span> 
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Dialog -->
+    <div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align" id="HeadingDelete"> Delete this deduction</h4>
+                </div>
+
+                <div class="modal-body">
+                    <br/>
+                    <div class="alert alert-danger">
+                        <span class="glyphicon glyphicon-warning-sign"></span>
+                        Are you sure you want to delete this deduction?
+                    </div>
+
+                </div>
+
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-danger"
+                            ng-click="deductionCtrl.deleteDeduction(deductionCtrl.selectedDeduction)">
+                        <span class="glyphicon glyphicon-ok-sign"> Yes</span>
+                    </button>
+                    <button id="delBtnNo" type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"> No</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

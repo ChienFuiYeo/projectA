@@ -8,117 +8,126 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Angular JS -->
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
-
-    <!-- Angular Material requires Angular.js Libraries -->
-    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
-
-    <!-- Angular Material Library -->
-    <script src="bower_components/angular-material/angular-material.min.js"></script>
-
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="bower_components/bootstrapvalidator/dist/css/bootstrapValidator.min.css">
+
+    <!--<link rel="stylesheet" href="bower_components/form.validation/dist/css/bootstrapValidator.min.css">-->
 
     <!-- Custom CSS -->
-    <link href="css/shop-item.css" rel="stylesheet">
-
-
+    <link href="css/custom.css" rel="stylesheet">
 </head>
 
 <body ng-app="payrollApp" ng-cloak>
 
-    <!-- Always shows a header, even in smaller screens. -->
-    <!--<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row">
-                <span class="mdl-layout-title">Payroll Management System</span>
-            </div>
-        </header>
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Menu</span>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" toogle-close ui-sref="staffMgmt">Staff</a>
-                <a class="mdl-navigation__link" toogle-close ui-sref="">Branch</a>
-                <a class="mdl-navigation__link" toogle-close ui-sref="">Job</a>
-                <a class="mdl-navigation__link" toogle-close ui-sref="">Payslip</a>
-                <a class="mdl-navigation__link" toogle-close ui-sref="">About Us</a>
-                <a class="mdl-navigation__link" toogle-close ui-sref="">Contact</a>
-            </nav>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar">asd</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" ui-sref="/">Payroll Management</a>
         </div>
-
-        <div class="container">
-            <div layout="row">
-                <div flex="10">
-                </div>
-                <div flex="80">
-                    <br/>
-                    <div ui-view=""></div>
-                </div>
-            </div>
-        </div>-->
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar">asd</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#" ui-sref="/">Payroll Management</a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="#" ui-sref="staffMgmt">Staff</a>
-                        </li>
-                        <li>
-                            <a href="#">Branch</a>
-                        </li>
-                        <li>
-                            <a href="#">Job</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container -->
-        </nav>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#" ui-sref="staffMgmt">Staff</a>
+                </li>
+                <li>
+                    <a href="#" ui-sref="branchMgmt">Branch</a>
+                </li>
+                <li>
+                    <a href="#" ui-sref="jobMgmt">Job</a>
+                </li>
+                <li>
+                    <a href="#" ui-sref="deductionMgmt">Deduction</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
 
 
-        <!-- Page Content -->
-        <div class="container">
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div ui-view=""></div>
+        <br/><br/><br/>
+    </div>
+</div>
+</div>
+
+<nav class="navbar navbar-inverse bg-inverse navbar-fixed-bottom">
+    <div class="container">
+        <!-- Footer -->
+        <div>
             <div class="row">
-                <div ui-view=""></div>
+                <div class="navbar-text">
+                    Copyright &copy; 2017 yeo. All Rights Reserved.
+                </div>
             </div>
         </div>
     </div>
+</nav>
 
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+<!-- Angular JS -->
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-resource/angular-resource.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="bower_components/angular-messages/angular-messages.min.js"></script>
 
-    <!-- My JS Script -->
-    <script src="js/app.js"></script>
-    <script src="js/directives.js"></script>
-    <script src="js/constants/Constants.js"></script>
-    <script src="js/controller/StaffController.js"></script>
-    <script src="js/service/StaffService.js"></script>
+<!-- Angular Material Library -->
+<script src="bower_components/angular-material/angular-material.min.js"></script>
+
+<!-- Angular Utils Pagination-->
+<script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
+
+
+<!-- My JS Script -->
+<script src="js/app.js"></script>
+<script src="js/directives.js"></script>
+<script src="js/constants/Constants.js"></script>
+<script src="js/controller/StaffController.js"></script>
+<script src="js/controller/BranchController.js"></script>
+<script src="js/controller/JobController.js"></script>
+<script src="js/controller/DeductionController.js"></script>
+<script src="js/service/StaffService.js"></script>
+<script src="js/service/BranchService.js"></script>
+<script src="js/service/JobService.js"></script>
+<script src="js/service/DeductionService.js"></script>
+
+<!-- Bootstrap Validator -->
+<script src="bower_components/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
+<!--<script src="bower_components/form.validation/dist/js/bootstrapValidator.min.js"></script>-->
+
+<script src="bower_components/moment/min/moment-with-locales.min.js"></script>
+
 </body>
 
 </html>

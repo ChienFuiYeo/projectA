@@ -10,7 +10,7 @@ public class JobInsertDTO {
 	private String jobCode;
 	private String jobDescription;
 	private BigDecimal rate;
-	private BigDecimal oum;
+	private String oum;
 	private String remarks;
 
 	public String getJobCode() {
@@ -37,11 +37,11 @@ public class JobInsertDTO {
 		this.rate = rate;
 	}
 
-	public BigDecimal getOum() {
+	public String getOum() {
 		return oum;
 	}
 
-	public void setOum(BigDecimal oum) {
+	public void setOum(String oum) {
 		this.oum = oum;
 	}
 
